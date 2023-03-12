@@ -6,11 +6,13 @@ const refs = {
   inputMessage: document.querySelector('[name = message]'),
   submitButton: document.querySelector('[type = submit]'),
 };
+populateForm()
 
 let userData = {};
+
 refs.formLogin.addEventListener(
   'input',
-  throttle(event => {
+  throttle((event => {
     
   
 
@@ -21,13 +23,23 @@ refs.formLogin.addEventListener(
   }),
   500
   
-);
+));
 
 refs.formLogin.addEventListener('submit', onFormHandleSubmit);
+
+
 
 function onFormHandleSubmit(event) {
   event.preventDefault();
   console.log(localStorage.getItem('feedback-form-state'));
   localStorage.removeItem('feedback-form-state');
   event.currentTarget.reset();
+}
+
+function populateForm() {
+  const savedData = JSON.parse(localStorage.getItem('feedback-form-state'));
+  if(savedData){
+    refs.inputEmail.value = savedData.email;
+    refs.inputMessage.value = savedData.message;
+  }
 }
