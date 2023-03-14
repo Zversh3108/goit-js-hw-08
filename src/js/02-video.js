@@ -15,9 +15,8 @@ const curentTimeFunc = data => {
   localStorage.setItem('videoplayer-current-time', `${data.seconds}`);
 };
 
-player.on('timeupdate', throttle((curentTimeFunc), 1000));
+player.on('timeupdate', throttle(curentTimeFunc, 1000));
 let videoCurrentTime = localStorage.getItem('videoplayer-current-time');
-
 
 player
   .setCurrentTime(videoCurrentTime)
