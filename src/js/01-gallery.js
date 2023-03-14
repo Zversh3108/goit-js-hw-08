@@ -21,7 +21,7 @@ gallery.addEventListener('click', onImageClick);
 function onImageClick(evt) {
   evt.preventDefault();
 }
-let lightbox = new SimpleLightbox('.gallery a', {
+new SimpleLightbox('.gallery a', {
   captionType: 'attr',
   captionsData: 'alt',
   captionDelay: 250,

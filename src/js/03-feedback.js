@@ -7,7 +7,7 @@ const refs = {
   submitButton: document.querySelector('[type = submit]'),
 };
 populateForm();
-
+const feedBackDataKey = 'feedback-form-state';
 let userData = {};
 
 refs.formLogin.addEventListener(
@@ -15,8 +15,7 @@ refs.formLogin.addEventListener(
   throttle(event => {
     userData[refs.inputMessage.name] = refs.inputMessage.value;
     userData[refs.inputEmail.type] = refs.inputEmail.value;
-
-    localStorage.setItem('feedback-form-state', JSON.stringify(userData));
+    localStorage.setItem(feedBackDataKey, JSON.stringify(userData));
   }, 500)
 );
 
@@ -24,8 +23,8 @@ refs.formLogin.addEventListener('submit', onFormHandleSubmit);
 
 function onFormHandleSubmit(event) {
   event.preventDefault();
-  console.log(localStorage.getItem('feedback-form-state'));
-  localStorage.removeItem('feedback-form-state');
+  localStorage.getItem(feedBackDataKey);
+  localStorage.removeItem(feedBackDataKey);
   event.currentTarget.reset();
 }
 
