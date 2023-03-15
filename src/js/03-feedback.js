@@ -6,8 +6,9 @@ const refs = {
   inputMessage: document.querySelector('[name = message]'),
   submitButton: document.querySelector('[type = submit]'),
 };
+const FEED_BACK_DATA_KEY = 'feedback-form-state';
 populateForm();
-const feedBackDataKey = 'feedback-form-state';
+
 let userData = {};
 
 refs.formLogin.addEventListener(
@@ -15,7 +16,7 @@ refs.formLogin.addEventListener(
   throttle(event => {
     userData[refs.inputMessage.name] = refs.inputMessage.value;
     userData[refs.inputEmail.type] = refs.inputEmail.value;
-    localStorage.setItem(feedBackDataKey, JSON.stringify(userData));
+    localStorage.setItem(FEED_BACK_DATA_KEY, JSON.stringify(userData));
   }, 500)
 );
 
@@ -23,13 +24,13 @@ refs.formLogin.addEventListener('submit', onFormHandleSubmit);
 
 function onFormHandleSubmit(event) {
   event.preventDefault();
-  localStorage.getItem(feedBackDataKey);
-  localStorage.removeItem(feedBackDataKey);
+  localStorage.getItem(FEED_BACK_DATA_KEY);
+  localStorage.removeItem(FEED_BACK_DATA_KEY);
   event.currentTarget.reset();
 }
 
 function populateForm() {
-  const savedData = JSON.parse(localStorage.getItem('feedback-form-state'));
+  const savedData = JSON.parse(localStorage.getItem(FEED_BACK_DATA_KEY));
   if (savedData) {
     refs.inputEmail.value = savedData.email;
     refs.inputMessage.value = savedData.message;
